@@ -32,9 +32,6 @@ function Home() {
           <Banner images={images} speed={17000} />
         </div>
       </div>
-      <div>{
-        //Future landing page will go here.
-      }</div>
     </div>
   );
 }

@@ -5,8 +5,10 @@ import { toast } from 'react-toastify';
 
 const SearchResults = ({ title, type, sort }) => {
     let mediaUrl;
+    //Determining if the user is logged in or not.
     const {user} = useAuthContext();
 
+    //Creating url for external apis based on the provdied type.
     switch (type){
         case "tv":
             mediaUrl = `https://api.tvmaze.com/search/shows?q=${encodeURIComponent(title)}`;
@@ -25,8 +27,10 @@ const SearchResults = ({ title, type, sort }) => {
             break;
     }
     
+    //Using custom hook to fetch the data from external api
     const { data: mediaList, isLoading, error } = useFetchMedia(mediaUrl, type);
 
+    //If something goes wrong with the fetch (or the data is loading), these will appear.
     if (isLoading) return <p style={{'paddingLeft': '2rem'}}>(╭ರ_•́)<br />Loading results for "{title}"...</p>;
     if (error) return <p style={{'paddingLeft': '2rem'}}>(ﾟヘﾟ)？<br />Error: {error}</p>;
     if (!mediaList || mediaList.length === 0) return <p style={{'paddingLeft': '2rem'}}>(ﾟヘﾟ)？<br />No results found for "{title}"</p>;
@@ -37,7 +41,6 @@ const SearchResults = ({ title, type, sort }) => {
                 {mediaList.map((media, i) => {
                     const information = {
                         name: media?.title_english || media?.title || media?.show?.name || media?.name,
-                        author: media?.title,
                         image_url:
                             media?.images?.jpg?.image_url ||
                             media?.show?.image?.medium ||
@@ -45,16 +48,23 @@ const SearchResults = ({ title, type, sort }) => {
                             media?.image ||
                             (media?.cover_i ? 'https://covers.openlibrary.org/b/id/'+media?.cover_i+'-M.jpg' : null) ||
                             "https://placehold.co/150x200/cccccc/333333?text=No+Cover",
-                        score: type==="tv" ? ((media?.show?.rating?.average!==null && media?.show?.rating?.average!==undefined) ? media?.show?.rating?.average : null) : ((media?.score!==null && media?.score!==undefined) ? media?.score : null),
                         progress: "",
                         type: type,
-                        fav: false,
                         rating: 0,
-                        status: "to-do",
+                        status: "to-do"
                     };
                     return (
                         <div className="search-result" key={i}>
-                            {information?.score && <p className="score">{information?.score + "⭐"}</p>}
+                            {type === "tv"
+                                // If the media type is TV and a score is present
+                                ? media?.show?.rating?.average !== null && media?.show?.rating?.average !== undefined && (
+                                    <p className="score">{media.show.rating.average}⭐</p>
+                                ) 
+                                // Else if the media type is not TV but a score is present
+                                : media?.score !== null && media?.score !== undefined && (
+                                    <p className="score">{media.score}⭐</p>
+                                )
+                            }
                             <img className="cover" src={information.image_url} alt={information.name} />
                             <div className="info">
                                 <div className="title" title={information.name}><p>{information.name}</p></div>
@@ -62,15 +72,20 @@ const SearchResults = ({ title, type, sort }) => {
                                 </div>
                                 <button onClick={
                                     async () => {
+                                        // Checking if the user is logged in
                                         if (!user){
                                             toast.error('You must be logged in!');
                                             return;
                                         }
+
+                                        //Getting the sessionStorage watchlist
                                         const cached = JSON.parse(sessionStorage.getItem('watchlist') || '[]');
-                                        console.log(cached);
+
+                                        //Seeing if the item already exists in the watchlist
                                         const index = cached.findIndex(item => item.name === information.name && item.type === information.type);
-                                        console.log(index);
+                                        //If the item isn't already in the list:
                                         if (index === -1) {
+                                            toast('Adding to your list. This may take a moment...');
                                             const response = await fetch(baseUrl+'/api/medias', {
                                                 method: 'POST',
                                                 headers: {
@@ -86,7 +101,7 @@ const SearchResults = ({ title, type, sort }) => {
                                                 sessionStorage.setItem('watchlist', JSON.stringify(cached));
                                                 toast.success(information.name+' added to your list!');
                                             } else {
-                                                toast.error('Error:', response);
+                                                toast.error('Sorry, an error has occured!');
                                             }
                                         } else {
                                             toast.warn(information.name+' is already in your list!');

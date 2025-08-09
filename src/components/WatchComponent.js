@@ -1,5 +1,6 @@
 import useLoadMedia from '../hooks/useLoadMedia';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 const WatchComponent = ({type}) => {
     const {mediaList, handleRemove, handleChange} = useLoadMedia(type);
@@ -14,7 +15,14 @@ const WatchComponent = ({type}) => {
         if (msg) toast.success(msg); 
     }
 
-    return (  
+    //Wrapping in a useEffect so it only fires once per render
+    useEffect(() => {
+        if (!mediaList) {
+            toast('Retrieving your list. This may take a moment...');
+        }
+    }, [mediaList]);
+
+    return (
         <div className="list-container-wrapper">
             <div className="list-container">
             {mediaList && mediaList.map((media, i) => {

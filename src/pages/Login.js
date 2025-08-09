@@ -3,33 +3,41 @@ import { Link } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
 import ReCaptcha from "../components/ReCaptcha";
 
-export default function Signup() {
+export default function Login() {
+    // Creating state variables for information that the user will submit
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const [recaptchaToken, setRecaptchaToken] = useState('');
+
+    //Creating a state variable to check if 'submitting' should be available
     const [submitEnabled, setSubmitEnabled] = useState(false);
 
+    //Only if there is a valid reCAPTCHA token, the submit button will be enabled
     useEffect(() => {
         if(recaptchaToken.length){
             setSubmitEnabled(true);
         }
     }, [recaptchaToken]);
-
+    
+    // The login function from the useLogin hook sends the data to serverside
     const {login, error, isLoading} = useLogin();
 
     const handleSubmit = async (e) => {
+        // Preventing the page from reloading on form submit
         e.preventDefault();
-
+        
+        // Only if submitEnabled returns true, the user will be able to login
         if (submitEnabled){
             await login(email, password, recaptchaToken);
         }
     }
 
+    //Updating the reCAPTCHA state variable
     const handleRecaptchaToken = (recaptchaToken) => {
         setRecaptchaToken(recaptchaToken);
     }
 
+    // If the reCAPTCHA token has expired, the submit button will disable
     const handleRecaptchaTokenExpired = (recaptchaToken) => {
         setRecaptchaToken('');
         setSubmitEnabled(false); 
