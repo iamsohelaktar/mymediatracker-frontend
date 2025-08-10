@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import { useAuthContext } from "../hooks/useAuthContext";
+import ThemeOption from "./ThemeOptions";
 
 function NavBar() {
   // Function that lets us get the current page a user is on.
@@ -19,6 +20,11 @@ function NavBar() {
         <Link to="/movie" className={location.pathname === "/movie" ? "highlight" : ""}>Movies</Link>
         <Link to="/tv" className={location.pathname === "/tv" ? "highlight" : ""}>TV Shows</Link>
       </div>}
+      <div className="theme-options">
+        <ThemeOption theme="light"/>
+        <ThemeOption theme="dark"/>
+        <ThemeOption theme="pink"/>
+      </div>
     </div>
   );
 }

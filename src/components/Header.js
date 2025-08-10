@@ -16,7 +16,7 @@ function Header() {
     <div className="Header">
       {/* site logo */}
       <Link to="/" className="site-title">
-        <img src="https://files.catbox.moe/8bst3m.png" alt=""/>
+        <div></div>
         <p>MyMediaTracker</p>
       </Link>
       <div style={{"display" : "flex", "gap" : "10px"}}>

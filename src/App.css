@@ -1,10 +1,4 @@
 :root{
-    --primary-text: #e0e0e0;
-    --primary-bg: #1a1c1d;
-    --secondary-bg: #131516;
-    --primary-accent: #4066be;
-    --primary-border: #3d3d3d;
-    --secondary-border: #213561;
     --error-bg: #f0adad;
     --error-border: #a94343;
     --toastify-font-family: "Outfit", sans-serif;
@@ -13,6 +7,67 @@
     --toastify-color-warning: #e5ba0f;
     --toastify-toast-padding: 10px;
 }
+
+[data-theme='dark']{
+    --primary-text: #e0e0e0;
+    --secondary-text: #c9c9c9;
+    --primary-bg: #1a1c1d;
+    --secondary-bg: #131516;
+    --select-bg: #353535;
+    --header-bg: #1a1c1dbc;
+
+    --primary-accent: #4066be;
+    --primary-gradient: linear-gradient(90deg, rgb(61, 135, 255), rgb(148, 61, 255), rgb(126, 61, 255), rgb(58, 134, 255));
+
+    --primary-border: #3d3d3d;
+    --secondary-border: #213561;
+    
+    --logo-src: url("https://files.catbox.moe/8bst3m.png");
+    --bg-src: url('https://files.catbox.moe/bkm7io.png');
+}
+
+[data-theme='pink'] {
+    --primary-text: #2e2e2e;
+    --secondary-text: #5a5a5a;
+    --primary-bg: #fff8fb;
+    --secondary-bg: #fff0f5;
+    --select-bg: #ffeaf1;
+    --header-bg: #ffd6e5cc;
+
+    --primary-accent: #ff9ebb;
+    --primary-gradient: linear-gradient(
+        90deg,
+        rgb(255, 145, 182),
+        rgb(254, 175, 224),
+        rgb(247, 167, 213),
+        rgb(255, 149, 220)
+    );
+
+    --primary-border: #e6cbd5; 
+    --secondary-border: #f5a7c5;
+
+    --logo-src: url("https://files.catbox.moe/xgg6fa.png");
+    --bg-src: url("https://files.catbox.moe/v5m0mh.png");
+}
+
+[data-theme='light'] {
+    --primary-text: #1c1c1c; 
+    --secondary-text: #5a5a5a; 
+    --primary-bg: #f8f9fa;
+    --secondary-bg: #ffffff; 
+    --select-bg: #e9f3ff; 
+    --header-bg: #e6f0ffcc; 
+
+    --primary-accent: #3a78d4;
+    --primary-gradient: linear-gradient(90deg, rgb(61, 135, 255), rgb(148, 61, 255), rgb(126, 61, 255), rgb(58, 134, 255));
+
+    --primary-border: #d0d0d0; 
+    --secondary-border: #9cbce8;
+
+    --logo-src: url("https://files.catbox.moe/8bst3m.png");
+    --bg-src: url("https://files.catbox.moe/v5m0mh.png");
+}
+
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -23,6 +78,7 @@
     padding: 0;
     font-family: "Outfit", sans-serif;
     color: var(--primary-text);
+    transition: background-color ease-in-out 0.2s;
 }
 
 body{
@@ -47,7 +103,7 @@ body{
     padding: 0.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: #1a1c1dbc;
+    background-color: var(--header-bg);
     position: sticky;
     gap: 10px;
     top: 0;
@@ -58,12 +114,27 @@ body{
     border-bottom: 1px solid var(--primary-border);
 }
 
-.Footer{
-    background-color: var(--primary-bg);
-    border-top: 1px solid var(--primary-border);
-    padding: 0.5rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+.theme-option{
+    height: 25px;
+    width: 25px;
+    border: 1px solid;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#theme-light{
+    background-color: #e0e0e0;
+    border-color: #c9c9c9;
+}
+
+#theme-dark{
+    background-color: #1a1c1d;
+    border-color: #e0e0e0;
+}
+
+#theme-pink{
+    background-color: #ff9ebb;
+    border-color: #f5a7c5;
 }
 
 .Header div{
@@ -76,11 +147,13 @@ body{
     display: flex;
     cursor: pointer;
     align-items: center;
-    transition: all ease-in-out 0.2s;
 } 
 
-.site-title img{
+.site-title div{
+    width: 35px;
     height: 35px;
+    background-image: var(--logo-src);
+    background-size: contain;
 }
 
 .NotHome{
@@ -95,12 +168,6 @@ body{
     font-weight: 600;
     padding-bottom: 0.5rem;
 }
-
-/* @media (max-width: 750px) {
-    .search-bar{
-        padding: 1rem;
-    }
-} */
 
 .search-bar{
     padding: 2rem;
@@ -131,8 +198,8 @@ body{
     font-size: 15px;
     padding: 3px 6px;
     border-radius: 4px;
-    background-color: #353535;
-    color: #c9c9c9;
+    background-color: var(--select-bg);
+    color: var(--secondary-text);
     cursor: pointer;
     border: 1px solid var(--primary-border);
     margin-right: 0.5rem;
@@ -164,8 +231,8 @@ body{
     font-size: 15px;
     padding: 3px 6px;
     border-radius: 4px;
-    background-color: #353535;
-    color: #c9c9c9;
+    background-color: var(--select-bg);
+    color: var(--secondary-text);
     cursor: pointer;
     border: 1px solid var(--primary-border);
     margin-right: 0.5rem;
@@ -188,7 +255,7 @@ body{
     border-right: 1px solid var(--primary-border);
 }
 
-.sidepanel div{
+.sidepanel > div {
     display: grid;
 }
 .sidepanel div a {
@@ -202,41 +269,50 @@ body{
     font-size: 16px;
     padding: 0.75rem;
     width: 100%;
-    transition: all ease-in-out 0.2s;
 }
 
 .sidepanel a:hover{
-    background-color: #141414a9;
-    transition: all ease-in-out 0.2s;
+    background-color: var(--header-bg);
 }
 
 .sidepanel .highlight{
-    background-color: #5c7fce;
+    background-color: var(--primary-accent);
 }
 
 .sidepanel .highlight:hover{
-    background-color: #7d8597;
+    background-color: var(--header-bg);
 }
 
+.theme-options{
+    display: flex !important;
+    gap: 3px;
+    margin-left: 3px;
+    margin-top: 10px;
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--primary-border);
+    background-color: var(--secondary-bg);
+    justify-content: center;
+}
 
 .button-top{
     background-color: var(--primary-bg);
-    border: 1px solid #7d8597;
+    border: 1px solid var(--secondary-text);
     outline: none;
     font-size: 1rem;
     align-self: center;
     border-radius: 7px;
-    box-shadow: 0px 0px 1px #53535361;
     color: var(--primary-text);
     cursor: pointer;
     width: fit-content;
     padding: 0.5rem;
+    transition: all ease-in-out 0.2s;
 }
 
 .button-top:hover{
     border: 1px solid var(--primary-accent);
     background-color: var(--secondary-bg);
-    box-shadow: 0px 0px 1px #43434384;
     transform: scale(1.03);
     transition: all ease-in-out 0.25s;
 }
@@ -274,7 +350,7 @@ body{
     border: 1px solid var(--primary-border);
     overflow:hidden;
     border-radius: 7px;
-    transition: all ease-in-out 0.2s;
+    transition: scale ease-in-out 0.2s;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -283,7 +359,7 @@ body{
 
 .search-result:hover{
     transform: scale(1.02);
-    transition: all ease-in-out 0.2s;
+    transition: scale ease-in-out 0.2s;
 }
 
 .search-result .info{
@@ -307,7 +383,6 @@ body{
 .search-result .title{
     font-size: 16px;
     font-weight: 500;
-    text-shadow: 10px 2px 10px rgba(0, 0, 0, 0.749);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -336,16 +411,6 @@ body{
     width: fit-content;
 }
 
-.search-result .heart{
-    position: absolute;
-    z-index: 100;
-    top: 3px;
-    right: 5px;
-    font-size: 16px;
-    background-color: #ffffff00;
-    width: fit-content;
-}
-
 .search-result .rating{
     width: fit-content;
     padding: 5px;
@@ -359,7 +424,7 @@ body{
 
 .search-result .rating label{
    font-size: 17px;
-   color: grey;
+   color: rgb(175, 175, 175);
    cursor: pointer;
    transition: transform 0.1s ease;
 }
@@ -445,27 +510,6 @@ body{
    radial-gradient(60% 30% at bottom ,transparent 70%, #fff) bottom/100% 50% no-repeat;
 }
 
- /* .inner:before{
-     content: '';
-     width: 100%;
-     height: 70px;
-     background: #fff;
-     position: absolute;
-     top: -40px;
-     z-index: 1;
-     border-radius: 100%;
- }
- .inner:after{
-     content: '';
-     width: 100%;
-     height: 70px;
-     background: #fff;
-     position: absolute;
-     bottom: -40px;
-     z-index: 1;
-     border-radius: 100%;
- } */
-
 .swiper-wrapper {
   position: absolute;
   display: flex;
@@ -511,7 +555,7 @@ section {
     z-index: -1;
     opacity: 0.8;
     filter: blur(2px);
-    background-image: url('https://files.catbox.moe/bkm7io.png');
+    background-image: var(--bg-src);
     background-size: cover;
     background-color: #0000007a;
     background-position: center;
@@ -529,7 +573,7 @@ section {
     border: none;  
     background-size: 300% 100%;  
     border-radius: 50px;
-    background-image: linear-gradient(90deg, rgb(61, 135, 255), rgb(148, 61, 255), rgb(126, 61, 255), rgb(58, 134, 255));  
+    background-image: var(--primary-gradient);  
     box-shadow: rgba(131, 82, 161, 0.68) 0px 2px 15px 0px;
     margin: 1rem;
     margin-bottom: 0.2rem;
@@ -557,7 +601,6 @@ a{
     justify-self: center;
     font-size: 7vw;
     font-weight: 500;
-    text-shadow: rgba(131, 82, 161, 0.68) 0px 2px 15px 0px;
 }
 
 ::-webkit-scrollbar-track {
@@ -567,7 +610,6 @@ a{
 .caption{
     justify-self: center;
     margin-bottom: 0.5rem;
-    text-shadow: rgba(131, 82, 161, 0.68) 0px 2px 15px 0px;
 }
 
 @media (min-width: 700px) {
@@ -634,7 +676,7 @@ a{
     left: 3rem;
     bottom: 1rem;
     font-size: 3rem;
-    text-shadow: 0px 4px 9px rgba(0, 0, 0, 0.685);
+    /* text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.685); */
     font-weight: 600;
 }
 
@@ -644,7 +686,7 @@ a{
     align-items: center;
     align-content: center;
     justify-content: center;
-    background-image: url('https://files.catbox.moe/bkm7io.png');
+    background-image: var(--bg-src);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -701,19 +743,3 @@ a{
     padding: 5px;
     border-radius: 8px;
 }
-
-/* .theme-switch{
-    font-size: 23px;
-    background-color: #1a1a1a00;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    margin: 0 5px;
-    color: var(--primary-text);
-    transition: all ease-in-out 0.05s;
-}
-
-.theme-switch:active{
-    transform: rotateZ(180deg);
-    transition: all ease-in-out 0.05s;
-} */

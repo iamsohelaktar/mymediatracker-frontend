@@ -70,11 +70,9 @@ function Search() {
             {!submitted && (
                 <div style={{'marginLeft': '2rem', 'backgroundColor' : 'var(--primary-bg)', 'padding':'1rem 2rem', 'borderRadius':'7px'}}>
                     <h2>Coming soon:</h2>
+                    <li>Notes 📝</li>
                     <li>'Favoriting' media ⭐</li>
-                    <li>Different themes 🎨</li>
-                    <li>Custom lists 📝</li>
-                    <li>More filters 🔍</li>
-                    <li>Author/Director Info 🎬</li>
+                    <li>Custom lists 📃</li>
                 </div>
             )}
             </div>
