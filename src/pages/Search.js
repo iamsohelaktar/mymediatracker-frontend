@@ -23,7 +23,6 @@ function Search() {
     return (
         <div className="Search">
             <div>
-            <h1>Search</h1>
             <form className="search-bar" onSubmit={handleSubmit}>
                 <div>
                 <input 
@@ -60,6 +59,7 @@ function Search() {
                 </div>
                 <button className="clear"onClick={() => setRecentSearches([])}>X</button>
             </div>
+            <div className="search-results-wrapper">
             {submitted && (
                 <SearchResults 
                     title={submitted.title} 
@@ -68,13 +68,22 @@ function Search() {
                 />
             )}
             {!submitted && (
-                <div style={{'marginLeft': '2rem', 'backgroundColor' : 'var(--primary-bg)', 'padding':'1rem 2rem', 'borderRadius':'7px'}}>
-                    <h2>Coming soon:</h2>
-                    <li>Notes 📝</li>
-                    <li>'Favoriting' media ⭐</li>
-                    <li>Custom lists 📃</li>
-                </div>
+                <>
+                <h2 style={{'margin':'1rem 0'}}>Recommended Anime</h2>
+                <SearchResults 
+                    title={''} 
+                    type={'top-anime'} 
+                    sort={'none'}
+                />
+                <h2 style={{'margin':'1rem 0 0.5rem'}}>Recommended Manga</h2>
+                <SearchResults 
+                    title={''} 
+                    type={'top-manga'} 
+                    sort={'none'}
+                />
+                </>
             )}
+            </div>
             </div>
         </div>
     );

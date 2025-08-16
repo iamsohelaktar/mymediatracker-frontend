@@ -10,6 +10,8 @@ import Signup from './pages/Signup.js';
 import Login from './pages/Login.js';
 import Movie from './pages/Movie';
 import Tv from './pages/Tv';
+import Profile from './pages/Profile';
+
 
 import { useAuthContext } from './hooks/useAuthContext.js';
 
@@ -50,6 +52,7 @@ function App() {
             <Route path="/manga" element={user ? <Manga />  : <Navigate to="/login"/>} />
             <Route path="/movie" element={user ? <Movie />  : <Navigate to="/login"/>} />
             <Route path="/tv" element={ user ? <Tv />  : <Navigate to="/login"/>} />
+            <Route path="/profile/:username" element={<Profile />} />
           </Route>
         </Routes>
       </div>

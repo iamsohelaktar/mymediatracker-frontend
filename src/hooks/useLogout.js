@@ -7,6 +7,9 @@ export const useLogout = () => {
         // remove user from local storage
         localStorage.removeItem('user');
 
+        //remove reCAPTCHA token from local storage
+        localStorage.removeItem('grecaptcha');
+
         // remove cached watchlist from session storage
         sessionStorage.removeItem('watchlist');
 

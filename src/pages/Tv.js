@@ -2,12 +2,14 @@ import WatchComponent from '../components/WatchComponent';
 
 function Tv() {
     return (
-        <div id="tv">
+        <div class="list-page">
             <div className="section-header">
                 <img src="https://www.davishighnews.com/wp-content/uploads/2018/10/tv-shows.jpg"  alt=""/>
                 <h2>TV Shows</h2>
             </div>
-            <WatchComponent type='tv'/>
+            <div className="list-container-wrapper">
+                <WatchComponent type='tv'/>
+            </div>
         </div>
     );
 }

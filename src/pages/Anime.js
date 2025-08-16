@@ -1,13 +1,22 @@
 import WatchComponent from '../components/WatchComponent';
+import {useEffect, useState} from 'react';
 
 function Anime() {
+    const [ banner, setBanner ] = useState();
+
+    useEffect(() => {
+        setBanner('https://i.redd.it/5n8hs34ztzk61.png');
+    }, []);
+
     return (
-        <div id="anime">
+        <div class="list-page">
             <div className="section-header">
-                <img src="https://dms.mydukaan.io/original/webp/media/2d463869-39a1-434e-bfe5-0d0fde49bd7a.jpeg" alt=""/>
+                <img src={banner} alt=""/>
                 <h2>Anime</h2>
             </div>
-            <WatchComponent type='anime'/>
+            <div className="list-container-wrapper">
+                <WatchComponent type='anime'/>
+            </div>
         </div>
     );
 }

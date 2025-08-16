@@ -1,6 +1,5 @@
 import useLoadMedia from '../hooks/useLoadMedia';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
 
 const WatchComponent = ({type}) => {
     const {mediaList, handleRemove, handleChange} = useLoadMedia(type);
@@ -15,16 +14,9 @@ const WatchComponent = ({type}) => {
         if (msg) toast.success(msg); 
     }
 
-    //Wrapping in a useEffect so it only fires once per render
-    useEffect(() => {
-        if (!mediaList) {
-            toast('Retrieving your list. This may take a moment...');
-        }
-    }, [mediaList]);
-
     return (
-        <div className="list-container-wrapper">
             <div className="list-container">
+            {mediaList.length === 0 && <p>Looks like there's nothing here...</p>}
             {mediaList && mediaList.map((media, i) => {
                 const savedRating  = media?.rating || '';
                 const savedStatus = media?.status || 'to-do';
@@ -32,7 +24,6 @@ const WatchComponent = ({type}) => {
             
                 return (
                     <div className="search-result" key={media._id}>
-                        {media?.score && <p className="score">{media?.score + "⭐"}</p>}
                         <img className="cover" loading="lazy" src={media.image_url} alt={media.name}/>
                         <div className="info">
                             <div className="title" title={media.name + " | Added " + media?.createdAt.slice(0,10)}><p>{media.name}</p></div>
@@ -102,7 +93,6 @@ const WatchComponent = ({type}) => {
                 );
             })}
             </div>
-        </div>
     );
 }
  

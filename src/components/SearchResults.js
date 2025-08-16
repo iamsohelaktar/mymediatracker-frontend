@@ -19,6 +19,15 @@ const SearchResults = ({ title, type, sort }) => {
         case "book":
             mediaUrl = `https://openlibrary.org/search.json?q=${encodeURIComponent(title)}`;
             break;
+        case "amiibo":
+            mediaUrl = "https://www.amiiboapi.com/api/amiibo/?name="+encodeURIComponent(title);
+            break;
+        case "top-anime":
+            mediaUrl = 'https://api.jikan.moe/v4/top/anime?limit=5';
+            break;
+        case "top-manga":
+            mediaUrl = 'https://api.jikan.moe/v4/top/manga?limit=5';
+            break;
         default: // For anime or manga aka Jikan
             mediaUrl = `https://api.jikan.moe/v4/${type}?q=${encodeURIComponent(title)}&sfw=true`;
             if (sort==='rating'){
@@ -31,9 +40,9 @@ const SearchResults = ({ title, type, sort }) => {
     const { data: mediaList, isLoading, error } = useFetchMedia(mediaUrl, type);
 
     //If something goes wrong with the fetch (or the data is loading), these will appear.
-    if (isLoading) return <p style={{'paddingLeft': '2rem'}}>(╭ರ_•́)<br />Loading results for "{title}"...</p>;
-    if (error) return <p style={{'paddingLeft': '2rem'}}>(ﾟヘﾟ)？<br />Error: {error}</p>;
-    if (!mediaList || mediaList.length === 0) return <p style={{'paddingLeft': '2rem'}}>(ﾟヘﾟ)？<br />No results found for "{title}"</p>;
+    if (isLoading) return <p>(╭ರ_•́)<br />Loading results for "{title}"...</p>;
+    if (error) return <p>(ﾟヘﾟ)？<br />Error: {error}</p>;
+    if (!mediaList || mediaList.length === 0) return <p>(ﾟヘﾟ)？<br />No results found for "{title}"</p>;
     
     return (
         <div>
