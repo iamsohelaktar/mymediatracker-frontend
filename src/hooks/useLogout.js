@@ -1,4 +1,5 @@
 import { useAuthContext } from "./useAuthContext";
+import { toast } from 'react-toastify';
 
 export const useLogout = () => {
     const {dispatch} = useAuthContext();
@@ -14,6 +15,7 @@ export const useLogout = () => {
         sessionStorage.removeItem('watchlist');
 
         dispatch({type: "LOGOUT"});
+        toast.success('Logged out successfully.')
     }
 
     return {logout}

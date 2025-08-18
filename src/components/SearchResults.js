@@ -90,8 +90,13 @@ const SearchResults = ({ title, type, sort }) => {
                                         //Getting the sessionStorage watchlist
                                         const cached = JSON.parse(sessionStorage.getItem('watchlist') || '[]');
 
+                                        let index;
                                         //Seeing if the item already exists in the watchlist
-                                        const index = cached.findIndex(item => item.name === information.name && item.type === information.type);
+                                        if (type==='book'){
+                                            index = -1;
+                                        } else {
+                                            index = cached.findIndex(item => item.name === information.name && item.type === information.type);
+                                        }
                                         //If the item isn't already in the list:
                                         if (index === -1) {
                                             toast('Adding to your list. This may take a moment...');

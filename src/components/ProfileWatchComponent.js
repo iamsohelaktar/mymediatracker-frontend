@@ -1,42 +1,11 @@
-import { useState, useEffect } from 'react';
-import {baseUrl} from '../Urls.js';
-import { useAuthContext } from '../hooks/useAuthContext';
-import { toast } from 'react-toastify';
-
-const ProfileWatchComponent = ({type, username}) => {
-    const {user} = useAuthContext();
-    const [loading, setLoading] = useState(true);
-
-    const [watchList, setWatchList] = useState([]);
-    useEffect( () => {
-        if (!user) return; 
-        const fetchProfileMedia = async () => {
-            setLoading(true);
-            const response = await fetch(baseUrl+'/api/medias/'+username, {
-                headers: {
-                    'Authorization': `Bearer ${user.token}`
-                }
-            });
-            const json = await response.json();
-            if (response.ok){
-                setWatchList(json);
-            } else { 
-                toast.success(response); 
-            }
-            setLoading(false);
-        }
-        if (user){
-            fetchProfileMedia();
-        } 
-    }, [username, user]);
+const ProfileWatchComponent = ({type, watchList}) => {
 
     const filteredList = [...watchList].filter(item => item.type===type);
 
     return (
             <div className="list-container">
-            {loading && <p>Loading your media...</p>}
-            {filteredList.length === 0 && !loading && <p>Looks like there's nothing here...</p>}
-            {filteredList && filteredList.map((media, i) => {
+            {filteredList.length === 0 && <p>Looks like there's nothing here...</p>}
+            {filteredList.length > 0 && filteredList.map((media, i) => {
                 const savedRating  = media?.rating || '';
                 const savedProgress = media?.progress || '';
                 const savedStatus = media?.status || '';

@@ -188,7 +188,7 @@ h2{
     font-size: 1.5rem;
     padding: 3px 6px;
     border-radius: 4px;
-    width: 90%;
+    width: 80%;
     background-color: var(--secondary-bg);
     border: 1px solid var(--primary-border);
 }
@@ -216,7 +216,7 @@ h2{
 }
 
 .recent-search-wrapper{
-    margin: 0 2rem 0.5rem;
+    margin: 0 2rem;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -227,6 +227,8 @@ h2{
     white-space: nowrap;
     overflow-x: scroll;
     align-items: center;
+    display: flex;
+    flex-direction: row;
 }
 
 .clear{
@@ -250,6 +252,8 @@ h2{
 
 .search-bar div{
     margin-bottom: 0.75rem;
+    display: flex;
+    flex-direction: row;
 }
 
 .sidepanel{
@@ -354,7 +358,7 @@ h2{
 
 .search-results-wrapper{
     padding: 2rem;
-    padding-top: 1rem;
+    padding-top: 0.5rem;
     padding-bottom: 3rem;
 }
 
@@ -687,6 +691,7 @@ a{
     width: 100%;
     padding: 2rem;
     padding-left: 3rem;
+    border-right: 1px solid var(--primary-border);
 }
 
 .list-page{
@@ -700,6 +705,7 @@ a{
     margin-top: 1rem;
     margin-bottom: 2rem;
     gap: 1.25rem;
+    
 }
 
 @media (max-width: 750px) {
@@ -798,10 +804,10 @@ a{
 }
 
 .profile-info{
-    padding: 1rem 0 1rem 2rem;
-    width: 25%;
+    padding: 2rem;
+    width: 30%;
     max-width: 300px;
-    height: 50vh;
+    height: 90vh;
     position: sticky;
     top: 3.5rem;
     gap: 1rem;
@@ -809,29 +815,54 @@ a{
     display: flex;
     flex-direction: column !important;
     align-items: center;
+    overflow-x: scroll;
 }
 
-.profile-info button{
+.profile-info select, .profile-info label, button{
     background-color: var(--primary-accent);
     border: 1px solid var(--secondary-border);
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.follow-list{
+    opacity: 0;
+}
+
+.follower-wrapper:hover .follow-list{
+    opacity: 1;
+}
+
+.profile-info span{
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+
+.profile-info a{
+    color: var(--secondary-text);
 }
 
 .pfp{
     border-radius: 50%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
     #profile{
-        flex-direction: column;
+       flex-direction: column-reverse;
     }
     .profile-info{
-        width: 100%;
         height: auto;
         position: unset;
+        width: 100%;
     }
     .pfp{
         width: 50%;

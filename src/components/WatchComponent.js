@@ -16,7 +16,7 @@ const WatchComponent = ({type}) => {
 
     return (
             <div className="list-container">
-            {mediaList.length === 0 && <p>Looks like there's nothing here...</p>}
+            {mediaList.length === 0 && <p>Your media is either loading or there's nothing added yet...</p>}
             {mediaList && mediaList.map((media, i) => {
                 const savedRating  = media?.rating || '';
                 const savedStatus = media?.status || 'to-do';
