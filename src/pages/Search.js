@@ -41,6 +41,7 @@ function Search() {
                     <option value="manga">Manga</option>
                     <option value="movie">Movies</option>
                     <option value="tv">TV Shows</option>
+                    <option value="game">Video Games</option>
                 </select>
                 
                 <span>

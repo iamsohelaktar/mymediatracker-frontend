@@ -69,7 +69,7 @@ const WatchComponent = ({type}) => {
                                     />
                                     <label htmlFor={'star1_'+media.name+media.type} className="fa fa-star"></label>
                                 </form>
-                                {['anime', 'book', 'manga', 'tv'].includes(type) && ['doing', 'on-hold'].includes(media.status) && <div className="episodes"><p>Progress: </p> <input type="number" onBlur={(e) => toastChange('progress', e.target.value, media)} defaultValue={savedProgress}/> </div>}
+                                {['anime', 'book', 'manga', 'tv', 'game'].includes(type) && ['doing', 'on-hold'].includes(media.status) && <div className="episodes"><p>Progress: </p> <input type="number" onBlur={(e) => toastChange('progress', e.target.value, media)} defaultValue={savedProgress}/> </div>}
                                 { ['anime','movie', 'tv'].includes(type) 
                                     ?
                                     <select name="status" className="status" defaultValue={savedStatus} onChange={(e) => toastChange('status', e.target.value, media)}>
@@ -78,13 +78,21 @@ const WatchComponent = ({type}) => {
                                         <option value="done">✔ Watched</option>
                                         <option value="on-hold">❚❚ On Hold</option>
                                     </select>  
-                                    : 
+                                    : ( ['manga','book' ].includes(type) ?
                                     <select name="status" className="status" defaultValue={savedStatus} onChange={(e) => toastChange('status', e.target.value, media)}>
                                         <option value="to-do">👁 Plan to Read</option>
                                         <option value="doing">▶ Reading</option>
                                         <option value="done">✔ Read</option>
                                         <option value="on-hold">❚❚ On Hold</option>
-                                    </select>  
+                                    </select>
+                                    : 
+                                    <select name="status" className="status" defaultValue={savedStatus} onChange={(e) => toastChange('status', e.target.value, media)}>
+                                        <option value="to-do">👁 Plan to Play</option>
+                                        <option value="doing">▶ Playing</option>
+                                        <option value="done">✔ Played</option>
+                                        <option value="on-hold">❚❚ On Hold</option>
+                                    </select>
+                                    )
                                 }
                             </div>
                             <button onClick={ () => toastRemove(media)}>Remove from List</button>

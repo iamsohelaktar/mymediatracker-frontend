@@ -19,8 +19,8 @@ const SearchResults = ({ title, type, sort }) => {
         case "book":
             mediaUrl = `https://openlibrary.org/search.json?q=${encodeURIComponent(title)}`;
             break;
-        case "amiibo":
-            mediaUrl = "https://www.amiiboapi.com/api/amiibo/?name="+encodeURIComponent(title);
+        case "game":
+            mediaUrl = baseUrl + '/api/search/games/'+encodeURIComponent(title);
             break;
         case "top-anime":
             mediaUrl = 'https://api.jikan.moe/v4/top/anime?limit=5';
@@ -49,10 +49,11 @@ const SearchResults = ({ title, type, sort }) => {
             <div className="search-results-container">
                 {mediaList.map((media, i) => {
                     const information = {
-                        name: media?.title_english || media?.title || media?.show?.name || media?.name,
+                        name: media?.title_english || media?.title || media?.show?.name || media?.name || media?.aliases,
                         image_url:
                             media?.images?.jpg?.image_url ||
                             media?.show?.image?.medium ||
+                            media?.image?.medium_url ||
                             media?.photo_url?.[1] ||
                             media?.image ||
                             (media?.cover_i ? 'https://covers.openlibrary.org/b/id/'+media?.cover_i+'-M.jpg' : null) ||

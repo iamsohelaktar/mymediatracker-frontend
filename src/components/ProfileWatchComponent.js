@@ -14,13 +14,13 @@ const ProfileWatchComponent = ({type, watchList}) => {
 
                 switch (savedStatus){
                     case "done":
-                        status =  ['anime','movie', 'tv'].includes(type) ? <div className="status">✔ Watched</div> : <div className="status">✔ Read</div>
+                        status =  ['anime','movie', 'tv'].includes(type) ? <div className="status">✔ Watched</div> : (['manga','book'].includes(type) ? <div className="status">✔ Read</div> : <div className="status">✔ Played</div> )
                         break;
                     case "to-do":
-                        status =  ['anime','movie', 'tv'].includes(type) ? <div className="status">👁 Plan to Watch</div> : <div className="status">👁 Plan to Read</div>
+                        status =  ['anime','movie', 'tv'].includes(type) ? <div className="status">👁 Plan to Watch</div> : (['manga','book'].includes(type) ? <div className="status">👁 Plan to Read</div> : <div className="status">👁 Plan to Play</div> )
                         break;
                     case "doing":
-                        status =  ['anime','movie', 'tv'].includes(type) ? <div className="status">▶ Watching</div> : <div className="status">▶ Reading</div>
+                        status =  ['anime','movie', 'tv'].includes(type) ? <div className="status">▶ Watching</div> : (['manga','book'].includes(type) ? <div className="status">▶ Reading</div> : <div className="status">▶ Playing</div> )
                         break;
                     case "on-hold":
                         status =  <div className="status">❚❚ On Hold</div>
@@ -42,7 +42,7 @@ const ProfileWatchComponent = ({type, watchList}) => {
                                     {savedRating >= 2 ? <div className="fa fa-star yes"></div> : <div className="fa fa-star"></div>}
                                     {savedRating >= 1 ? <div className="fa fa-star yes"></div> : <div className="fa fa-star"></div>}
                                 </div>
-                                {['anime', 'book', 'manga', 'tv'].includes(type) && ['doing', 'on-hold'].includes(media.status) && savedProgress && <div className="episodes"><p>Progress: {savedProgress}</p></div>}
+                                {['anime', 'book', 'manga', 'tv', 'game'].includes(type) && ['doing', 'on-hold'].includes(media.status) && savedProgress && <div className="episodes"><p>Progress: {savedProgress}</p></div>}
                                 {status}
                             </div>
                         </div>

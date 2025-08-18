@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 function NavBar() {
   // Function that lets us get the current page a user is on.
   const location = useLocation();
-  const show = ['/anime', '/book', '/manga', '/movie', '/tv'].includes(location.pathname);
+  const show = ['/anime', '/book', '/manga', '/movie', '/tv', '/game'].includes(location.pathname);
 
   // Checking if the user is signed in.
   const { user } = useAuthContext();
@@ -29,6 +29,7 @@ function NavBar() {
         <Link to="/manga" className={location.pathname === "/manga" ? "highlight" : ""}>Manga</Link>
         <Link to="/movie" className={location.pathname === "/movie" ? "highlight" : ""}>Movies</Link>
         <Link to="/tv" className={location.pathname === "/tv" ? "highlight" : ""}>TV Shows</Link>
+        <Link to="/game" className={location.pathname === "/game" ? "highlight" : ""}>Video Games</Link>
       </div>}
       {user && 
       <Link to={'/profile/'+user?.username} className={location.pathname === `/profile/${user?.username}` ? "highlight" : ""}>

@@ -155,6 +155,8 @@ function Profile() {
                 updatedData = JSON.stringify({ private: false });
                 setPrivacy(false);
                 break;
+            default:
+                break;
         }
         const res = await fetch(baseUrl+"/api/user/"+username+"/privacy/", {
             method: 'PATCH',
@@ -218,14 +220,17 @@ function Profile() {
                 <ProfileWatchComponent type='movie' watchList={watchList}/>
                 <h2>{username}'s TV Shows</h2>
                 <ProfileWatchComponent type='tv' watchList={watchList}/>
+                <h2>{username}'s Video Games</h2>
+                <ProfileWatchComponent type='game' watchList={watchList}/>
                 </>
                 }
             </div>
             <div className="profile-info">
                 <div>
-                    {icon && <img className="pfp" src={icon}/>}
+                    {icon && <img className="pfp" src={icon} alt="Icon"/>}
                 </div>
                 <h2>@{username}</h2>
+                <div>{watchList.length} Titles</div>
                 {user.username === username &&
                 <div>
                     <input

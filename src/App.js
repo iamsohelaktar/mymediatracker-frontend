@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Header from './components/Header.js';
 import Search from './pages/Search';
 import Anime from './pages/Anime';
+import Game from './pages/Game';
 import Book from './pages/Book';
 import Manga from './pages/Manga';
 import Signup from './pages/Signup.js';
@@ -52,6 +53,7 @@ function App() {
             <Route path="/manga" element={user ? <Manga />  : <Navigate to="/login"/>} />
             <Route path="/movie" element={user ? <Movie />  : <Navigate to="/login"/>} />
             <Route path="/tv" element={ user ? <Tv />  : <Navigate to="/login"/>} />
+            <Route path="/game" element={ user ? <Game />  : <Navigate to="/login"/>} />
             <Route path="/profile/:username" element={<Profile />} />
           </Route>
         </Routes>
