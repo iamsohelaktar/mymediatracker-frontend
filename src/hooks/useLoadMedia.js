@@ -20,6 +20,9 @@ const useLoadMedia = (type) => {
                 setWatchList(json);
                 sessionStorage.setItem('watchlist', JSON.stringify(json));
             } else { 
+                if (response.status === 429){
+                    toast.error("Too many requests! Try again later.")
+                }
                 console.log(response);
             }
         }

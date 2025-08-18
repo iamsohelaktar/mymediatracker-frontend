@@ -46,10 +46,11 @@ export default function Signup() {
                     <label htmlFor="username">Username</label>
                     <input 
                         type="text"
-                        placeholder="Enter Username"
+                        placeholder="Enter Username (lowercase)"
                         autoComplete="off"
                         name="username"
                         value={username}
+                        pattern="[a-z]*"
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />

@@ -12,6 +12,8 @@ export const useSignup = () => {
         setIsLoading(true);
         setError(null);
 
+        username = username.toLowerCase();
+
         const response = await fetch(baseUrl+'/api/user/signup', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
