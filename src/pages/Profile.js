@@ -59,7 +59,7 @@ function Profile() {
     const getFollowing = async () => {
         // The base follow route is /api/followers/:username
         // The route includes the username of the current profile.
-        const res = await fetch(baseUrl+'/api/user/following/'+username, {
+        const res = await fetch(baseUrl+'/api/user/'+username+'/following', {
             headers: {
                 'Authorization': `Bearer ${user.token}`
             }
@@ -73,7 +73,7 @@ function Profile() {
         // The base follow route is /api/followers/:username
         // The route includes the username of the current profile.
         try{
-            const res = await fetch(baseUrl+'/api/user/followers/'+username, {
+            const res = await fetch(baseUrl+'/api/user/'+username+'/followers', {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
@@ -91,7 +91,7 @@ function Profile() {
         // The base follow route is /api/user/icon/:username
         // The route includes the username of the current profile.
         try{
-            const res = await fetch(baseUrl+'/api/user/icon/'+username, {
+            const res = await fetch(baseUrl+'/api/user/'+username+'/icon', {
                 headers: {
                     'Authorization': `Bearer ${user.token}`
                 }
@@ -115,7 +115,7 @@ function Profile() {
         // The base follow route is /api/user/follow
         // The body includes the current user which is used to identify the sender.
         // The route includes the username of the current profile which is used to identify the receiver.
-        const res = await fetch(baseUrl+'/api/user/follow/'+username, {
+        const res = await fetch(baseUrl+'/api/user/'+username+'/follow', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -132,7 +132,7 @@ function Profile() {
         // The base follow route is /api/user/unfollow
         // The body includes the current user which is used to identify the sender.
         // The route includes the username of the current profile which is used to identify the receiver.
-        const res = await fetch(baseUrl+'/api/user/unfollow/'+username, {
+        const res = await fetch(baseUrl+'/api/user/'+username+'/unfollow', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ function Profile() {
             default:
                 break;
         }
-        const res = await fetch(baseUrl+"/api/user/"+username+"/privacy/", {
+        const res = await fetch(baseUrl+"/api/user/"+username+"/privacy", {
             method: 'PATCH',
             headers: {
                 'Content-Type': "application/json",
@@ -179,7 +179,7 @@ function Profile() {
 
         async function upload_img_to_database() {
             try{
-                const res = await fetch( baseUrl + '/api/user/'+username+'/process-icon', {
+                const res = await fetch( baseUrl + '/api/user/'+username+'/icon', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${user.token}`
