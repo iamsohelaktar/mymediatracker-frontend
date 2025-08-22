@@ -1,5 +1,7 @@
 [![Releases](https://img.shields.io/github/v/release/iamsohelaktar/mymediatracker-frontend?label=Releases&color=blue)](https://github.com/iamsohelaktar/mymediatracker-frontend/releases)
 
+Original repo by https://github.com/ishashenoy --> https://github.com/ishashenoy/mymediatracker-frontend
+
 # MyMediaTracker Frontend — React UI for Movies, TV, Books
 
 🎬 📚 📺 — Frontend client for tracking anime, movies, TV shows, and books. Built with React and standard web tech. Uses Jikan, TVmaze, and Open Library APIs for rich metadata and cover art.
